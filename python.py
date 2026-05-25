@@ -1,8 +1,8 @@
-print("Bienvenido al sistema de inventarios")
+print("🛒Bienvenido al sistema de inventarios💹")
 print("-"*40)
 inventario = [ ]
-def agregar():
-    nombre = input("Ingresa el nombre del producto: ")
+def agregar_producto():
+    nombre = input("Ingresa el nombre del producto: ").lower()
     precio = float(input("Ingresa el precio del producto: "))
     cantidad = int(input("Ingresa la cantidad: "))
     total = precio * cantidad
@@ -13,28 +13,29 @@ def agregar():
     "total" : total
     }
     inventario.append(dic)
-    print(f"Producto {nombre} agregado correctamente")
+    print(f"Producto {nombre} agregado correctamente✅")
     print("-"*40)
-def mostrar( ):
+def mostrar_inventario( ):
     if len(inventario) == 0:
         print("El inventario esta vacio")
     else:
         for i in inventario:
             print(f"Producto : {i['nombre']}")
-            print(f"Precio : {i['precio']}")
+            print(f"Precio : ${i['precio']:.2f}")
             print(f"Cantidad : {i['cantidad']}")
-            print(f"Total : {i['total']}")
-def eliminar():
-    nombre_usuario = input("Ingrese el nombre del producto a eliminar".strip())
+            print(f"Total : ${i['total']:.2f}")
+            print("-"*40)
+def eliminar_producto():
+    nombre_a_eliminar = input("Ingrese el nombre del producto a eliminar".strip()).lower()
     for i in inventario:
-        if nombre_usuario in i['nombre']:
-            inventario.remove(nombre_usuario)
-            print("Producto eliminado")
-        else:
-            if nombre_usuario != i['nombre']:
-                print("El producto no existe")
+        if nombre_a_eliminar == i['nombre']:
+            inventario.remove(i)
+            print("Producto eliminado correctamente✅ ")
+            return
+    print("El producto no existe❌")
+        
 def salir():
-    print("Hasta luego")
+    print("👋Hasta pronto")
     
 
 while True:
@@ -45,11 +46,11 @@ while True:
     print("-"*40)
     op = input("Ingrese la opcion a realizar")
     if op == "1":
-        agregar()
+        agregar_producto()
     elif op =="2":
-        eliminar()
+        eliminar_producto()
     elif op =="3":
-        mostrar()
+        mostrar_inventario()
     elif op =="4":
         salir()
         break
