@@ -20,10 +20,10 @@ def mostrar( ):
         print("El inventario esta vacio")
     else:
         for i in inventario:
-            print(f"Producto {i['nombre']}")
-            print(f"Precio {i['precio']}")
-            print(f"Cantidad {i['cantidad']}")
-            print(f"Total {i['total']}")
+            print(f"Producto : {i['nombre']}")
+            print(f"Precio : {i['precio']}")
+            print(f"Cantidad : {i['cantidad']}")
+            print(f"Total : {i['total']}")
 def eliminar():
     nombre_usuario = input("Ingrese el nombre del producto a eliminar".strip())
     for i in inventario:
