@@ -1,22 +1,35 @@
 # 🛒 Sistema de Inventario en Python
 
-Proyecto hecho en Python para administrar productos desde consola.
+Proyecto desarrollado en Python para gestionar productos desde consola.
 
-## Funciones
+## 🚀 Funcionalidades
+
 - Agregar productos
 - Mostrar inventario
 - Eliminar productos
-- Calcular valor total
+- Calcular valor total del inventario
+- Manejo de errores con try/except
 - Generar reportes TXT
+- Añadir información a reportes TXT existentes
+- Generar reportes CSV
+- Añadir información a archivos CSV existentes
 
-## Tecnologías
+## 🛠️ Tecnologías utilizadas
+
 - Python
+- CSV
+- Datetime
 - Git
 - GitHub
 
-## Conceptos aprendidos
+## 📚 Conceptos aplicados
+
 - Funciones
 - Listas
 - Diccionarios
-- Manejo de archivos
-- Try/Except
+- Bucles
+- Manejo de errores
+- Manejo de archivos TXT
+- Manejo de archivos CSV
+- Fechas y horas
+- Control de versiones con Git
