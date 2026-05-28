@@ -1,4 +1,5 @@
 from datetime import datetime
+import csv
 print("🛒Bienvenido al sistema de inventarios💹")
 print("-"*40)
 inventario = [ ]
@@ -89,6 +90,49 @@ def Agregar_al_Existente():
         archivo.write(f"{'TOTAL DE ESTA ENTRADA:':<40} ${gran_total_final:>8.2f}\n")
         archivo.write("="*50 + "\n")    
     print("✅ Items agregados al final del archivo existente.")
+def guardar_csv():
+    ahora= datetime.now()
+    reporte_fecha = ahora.strftime("%d/%m/%Y %H:%M:%S")
+    with open("Reporte_Generado.csv", "w", newline="", encoding="utf-8")as archivo:
+        escribir = csv.writer(archivo)
+        escribir.writerow(["PRODUCTO", "CANT.", "PRECIO", "TOTAL"])
+        gran_total = 0
+        for i in inventario:
+            escribir.writerow([
+                i['nombre'].capitalize(),
+                i['cantidad'],
+                i['precio'],
+                i['total']
+            ])
+        
+            gran_total += i["total"]
+        escribir.writerow([])
+        escribir.writerow(["TOTAL INVENTARIO", "", "", gran_total])
+        escribir.writerow(["FECHA REPORTE", "","", reporte_fecha])
+    print("✅ ¡Reporte guardado en 'reporte_inventario.csv'!")
+def añadir_csv():
+    ahora = datetime.now()
+    reporte_fecha = ahora.strftime("%d/%m/%Y %H:%M:%S")
+    with open("Reporte_Generado.csv", "a", newline="", encoding="utf-8" )as archivo:
+        escribir = csv.writer(archivo)
+        escribir.writerow([])
+        gran_total = 0
+        for i in inventario:
+            
+            escribir.writerow([
+                
+                i['nombre'].capitalize(),
+                i['cantidad'],
+                i['precio'],
+                i['total']
+            ])
+            gran_total += i["total"]
+
+        escribir.writerow([])
+        escribir.writerow(["TOTAL INVENTARIO AÑADIDO", "", "", gran_total])
+        escribir.writerow(["FECHA REPORTE", "","", reporte_fecha])
+    print("✅ ¡Reporte añadido guardado en 'reporte_inventario.csv'!")
+            
 
 def salir():
 
@@ -102,7 +146,9 @@ while True:
     print("4-Valor Total Inventario")
     print("5-Guardar inventario en Archivo TXT")
     print("6-Agregar archivo al existente TXT")
-    print("7-Salir")
+    print("7-Crear archivo CSV Inventario")
+    print("8-Añadir archivo exitente CSV")
+    print("9-Salir")
     print("-"*40)
     op = input("Ingrese la opcion a realizar")
     if op == "1":
@@ -117,13 +163,16 @@ while True:
         guardar_en_plantilla()
     elif op == "6":
         Agregar_al_Existente()
-    elif op =="7":
+    elif op == "7":
+        guardar_csv()
+    elif op == "8":
+        añadir_csv()
+    elif op =="9":
         salir()
         break
     else:
         print("-"*40)
         print("La opcion no es valida")
-    
 
 
 
