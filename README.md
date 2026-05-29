@@ -13,11 +13,14 @@ Proyecto desarrollado en Python para gestionar productos desde consola.
 - Añadir información a reportes TXT existentes
 - Generar reportes CSV
 - Añadir información a archivos CSV existentes
+- Exportación JSON
+- Validación de datos
 
 ## 🛠️ Tecnologías utilizadas
 
 - Python
 - CSV
+- JSON
 - Datetime
 - Git
 - GitHub
@@ -31,5 +34,6 @@ Proyecto desarrollado en Python para gestionar productos desde consola.
 - Manejo de errores
 - Manejo de archivos TXT
 - Manejo de archivos CSV
+- Manejo de archivos JSON
 - Fechas y horas
 - Control de versiones con Git
