@@ -1,27 +1,48 @@
 from datetime import datetime
 import csv
+import json
 print("🛒Bienvenido al sistema de inventarios💹")
 print("-"*40)
 inventario = [ ]
 def agregar_producto():
     nombre = input("Ingresa el nombre del producto: ").upper()
     
-        
-    try:
-        precio = float(input("Ingresa el precio del producto: "))
-        cantidad = int(input("Ingresa la cantidad: "))
-        total = precio * cantidad
+    while True:
+        try:
+            precio = float(input("Ingresa el precio del producto: "))
+            if precio < 0:
+                print("ERROR: El precio no puede ser negativo")
+            else:
+                break
 
-        diccionario = {
+        except ValueError:
+            print("Recuerda que solo se aceptan números")
+
+
+    while True:
+        try:
+            cantidad = int(input("Ingresa la cantidad: "))
+
+            if cantidad < 0:
+                print("ERROR: No puede haber cantidad negativa")
+            else:
+                break
+
+        except ValueError:
+            print("Recuerda que solo van números positivos")
+
+
+    total = precio * cantidad
+
+    diccionario = {
         "nombre" : nombre,
         "precio" : precio,
         "cantidad" : cantidad,
         "total" : total
         }
-        inventario.append(diccionario)
-        print(f"Producto {nombre} agregado correctamente✅")
-    except ValueError:
-        print("❌Error: Recuerda que solo van numeros en precio y cantidad")
+    inventario.append(diccionario)
+    print(f"Producto {nombre} agregado correctamente✅")
+    
     print("-"*40)
 def mostrar_inventario( ):
     if len(inventario) == 0:
@@ -115,10 +136,9 @@ def añadir_csv():
     reporte_fecha = ahora.strftime("%d/%m/%Y %H:%M:%S")
     with open("Reporte_Generado.csv", "a", newline="", encoding="utf-8" )as archivo:
         escribir = csv.writer(archivo)
-        escribir.writerow([])
         gran_total = 0
         for i in inventario:
-            
+            escribir.writerow([])
             escribir.writerow([
                 
                 i['nombre'].capitalize(),
@@ -132,8 +152,25 @@ def añadir_csv():
         escribir.writerow(["TOTAL INVENTARIO AÑADIDO", "", "", gran_total])
         escribir.writerow(["FECHA REPORTE", "","", reporte_fecha])
     print("✅ ¡Reporte añadido guardado en 'reporte_inventario.csv'!")
-            
-
+def guardar_json():
+    fecha = datetime.now()
+    reporte_hora = fecha.strftime("%d/%m/%Y %H:%M:%S")
+    datos_json =[]
+    for datos_inventario in inventario:
+        linea = {
+            "PRODUCTO": datos_inventario['nombre'],
+            "CANTIDAD": datos_inventario['cantidad'],
+            "PRECIO": datos_inventario['precio'],
+            "TOTAL": datos_inventario['total']
+    }
+        datos_json.append(linea)
+    reporte = {
+        "Fecha reporte": reporte_hora,
+        "Inventario": datos_json
+    }
+    with open ("Reporte_Generado.json", "w", encoding="utf-8") as archivo:
+        json.dump(reporte, archivo , indent=4, ensure_ascii= False)
+    print("Archivo JSON creado Correctamente")
 def salir():
 
     print("👋Hasta pronto")
@@ -148,7 +185,8 @@ while True:
     print("6-Agregar archivo al existente TXT")
     print("7-Crear archivo CSV Inventario")
     print("8-Añadir archivo exitente CSV")
-    print("9-Salir")
+    print("9-Crear Inventario en JSON")
+    print("10-Salir")
     print("-"*40)
     op = input("Ingrese la opcion a realizar")
     if op == "1":
@@ -168,6 +206,8 @@ while True:
     elif op == "8":
         añadir_csv()
     elif op =="9":
+        guardar_json()
+    elif op =="10":
         salir()
         break
     else:
