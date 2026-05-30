@@ -1,39 +1,72 @@
-# 🛒 Sistema de Inventario en Python
+Sistema de Inventario con SQLite
 
-Proyecto desarrollado en Python para gestionar productos desde consola.
+📋 Descripción
 
-## 🚀 Funcionalidades
+Sistema de inventario desarrollado en Python que permite gestionar productos mediante una base de datos SQLite.
 
-- Agregar productos
-- Mostrar inventario
-- Eliminar productos
-- Calcular valor total del inventario
-- Manejo de errores con try/except
-- Generar reportes TXT
-- Añadir información a reportes TXT existentes
-- Generar reportes CSV
-- Añadir información a archivos CSV existentes
-- Exportación JSON
-- Validación de datos
+🚀 Funcionalidades
 
-## 🛠️ Tecnologías utilizadas
+- Agregar productos.
+- Buscar productos.
+- Mostrar inventario completo.
+- Actualizar stock y precio.
+- Eliminar productos.
+- Calcular el valor total del inventario.
+- Exportar reportes en formato TXT.
+- Exportar reportes en formato CSV.
+- Exportar reportes en formato JSON.
+- Validación de datos mediante "try/except".
+- Persistencia de datos utilizando SQLite.
+
+🛠️ Tecnologías utilizadas
 
 - Python
-- CSV
+- SQLite
 - JSON
+- CSV
 - Datetime
 - Git
 - GitHub
 
-## 📚 Conceptos aplicados
+📚 Conceptos aplicados
 
 - Funciones
-- Listas
 - Diccionarios
-- Bucles
-- Manejo de errores
-- Manejo de archivos TXT
-- Manejo de archivos CSV
-- Manejo de archivos JSON
-- Fechas y horas
-- Control de versiones con Git
+- Bucles ("while" y "for")
+- Manejo de excepciones
+- CRUD (Create, Read, Update, Delete)
+- Bases de datos SQL
+- Exportación de archivos
+- Validación de datos
+
+🗄️ Operaciones CRUD
+
+Create
+
+Agregar productos al inventario.
+
+Read
+
+Consultar y buscar productos.
+
+Update
+
+Actualizar cantidad, precio y total de productos.
+
+Delete
+
+Eliminar productos del inventario.
+
+🔮 Próximas mejoras
+
+- Interfaz web con Flask.
+- Diseño HTML y CSS.
+- Sistema de usuarios.
+- Dashboard de estadísticas.
+- Despliegue en la nube.
+
+👨‍💻 Autor
+
+Sergio Cuellar Mendoza
+
+Proyecto de aprendizaje y práctica desarrollado con Python y SQLite.
