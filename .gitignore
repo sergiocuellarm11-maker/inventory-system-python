@@ -1,0 +1,10 @@
+# Ignorar la base de datos local (así no se borran tus datos reales en GitHub)
+inventario.db
+
+# Ignorar archivos temporales que genera Python al ejecutarse
+__pycache__/
+*.pyc
+
+# Por si usas entorno virtual, ignorar sus carpetas
+venv/
+.venv/

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario Web Profesional</title>
+    
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 40px; 
+            background-color: #f4f7f6; 
+            color: #333; 
+        }
+        h1 { color: #2c3e50; }
+        
+        /* Contenedor Flexbox para poner las dos tarjetas de formularios lado a lado */
+        .container { 
+            display: flex; 
+            gap: 20px; 
+        }
+        
+        /* Tarjetas blancas flotantes */
+        .box { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            flex: 1; 
+        }
+        
+        /* Cajas de texto y botones */
+        input, button { 
+            display: block; 
+            width: 95%; 
+            margin-bottom: 10px; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+        }
+        
+        button { 
+            background-color: #27ae60; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
+        button:hover { background-color: #219150; }
+        
+        /* Botón de actualizar (Naranja) */
+        .btn-alert { background-color: #e67e22; }
+        .btn-alert:hover { background-color: #d35400; }
+        
+        /* Diseño de la Tabla */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+            background: white; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #2c3e50; color: white; }
+        
+        /* Estilos para las Alertas Flash (Verde Éxito / Rojo Peligro) */
+        .flash { padding: 10px; margin-bottom: 15px; border-radius: 4px; font-weight: bold; }
+        .success { background-color: #d4edda; color: #155724; }
+        .danger { background-color: #f8d7da; color: #721c24; }
+        
+        /* Enlace de eliminación (Rojo) */
+        .btn-delete { color: #e74c3c; text-decoration: none; font-weight: bold; }
+        
+        /* Estructura inferior para reportes y total alineados */
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+        }
+        .report-buttons { display: flex; gap: 10px; }
+        
+        /* Botones Base de Reportes */
+        .btn-report {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+        .btn-txt { background-color: #7f8c8d; }
+        .btn-txt:hover { background-color: #6c7a7d; }
+        .btn-csv { background-color: #2980b9; }
+        .btn-csv:hover { background-color: #2471a3; }
+        .btn-json { background-color: #8e44ad; }
+        .btn-json:hover { background-color: #7d3c98; }
+        
+        .total-box { font-size: 24px; font-weight: bold; color: #2c3e50; }
+    </style>
+</head>
+<body>
+
+    <h1>🛒 Sistema de Inventarios con SQL (Flask) 💹</h1>
+    <hr>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        <div class="box">
+            <h3>➕ Agregar Producto</h3>
+            <form action="/agregar" method="POST">
+                <input type="text" name="nombre" placeholder="Nombre del producto" required>
+                <input type="number" step="0.01" name="precio" placeholder="Precio" required>
+                <input type="number" name="cantidad" placeholder="Cantidad" required>
+                <button type="submit">Agregar al Inventario</button>
+            </form>
+        </div>
+
+        <div class="box">
+            <h3>🔄 Actualizar Stock / Precio</h3>
+            <form action="/actualizar" method="POST">
+                <input type="text" name="nombre" placeholder="Nombre del producto a buscar" required>
+                <input type="number" step="0.01" name="precio" placeholder="Nuevo precio" required>
+                <input type="number" name="cantidad" placeholder="Nueva cantidad" required>
+                <button type="submit" class="btn-alert">Actualizar Producto</button>
+            </form>
+        </div>
+    </div>
+
+    <h2>📦 Productos en Existencia</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto[0] }}</td>
+                <td>{{ producto[1] }}</td>
+                <td>${{ "%.2f"|format(producto[2]) }}</td>
+                <td>{{ producto[3] }}</td>
+                <td>${{ "%.2f"|format(producto[4]) }}</td>
+                <td>
+                    <a href="/eliminar/{{ producto[0] }}" class="btn-delete" onclick="return confirm('¿Seguro que deseas eliminar este producto?');">❌ Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer-container">
+        <div class="report-buttons">
+            <a href="/reporte/txt" class="btn-report btn-txt">📄 Reporte TXT</a>
+            <a href="/reporte/csv" class="btn-report btn-csv">📊 Reporte CSV</a>
+            <a href="/reporte/json" class="btn-report btn-json">⚙️ Reporte JSON</a>
+        </div>
+        
+        <div class="total-box">
+            💰 Valor Total del Inventario: ${{ "%.2f"|format(gran_total) }}
+        </div>
+    </div>
+
+</body>
+</html>
