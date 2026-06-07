@@ -1,72 +1,39 @@
-Sistema de Inventario con SQLite
+# 🛒 Sistema de Control de Inventario Web con SQL (Flask)
 
-📋 Descripción
+Una aplicación web moderna, ligera y robusta desarrollada en **Python** utilizando el microframework **Flask** y **SQLite3** como motor de base de datos. Esta versión migra la lógica de consola anterior a una interfaz gráfica de usuario (GUI) basada en navegador, incorporando un sistema dinámico de alertas y un módulo avanzado de exportación de reportes.
 
-Sistema de inventario desarrollado en Python que permite gestionar productos mediante una base de datos SQLite.
+---
 
-🚀 Funcionalidades
+## 🚀 Características y Funcionalidades
 
-- Agregar productos.
-- Buscar productos.
-- Mostrar inventario completo.
-- Actualizar stock y precio.
-- Eliminar productos.
-- Calcular el valor total del inventario.
-- Exportar reportes en formato TXT.
-- Exportar reportes en formato CSV.
-- Exportar reportes en formato JSON.
-- Validación de datos mediante "try/except".
-- Persistencia de datos utilizando SQLite.
+* **Diseño Web Responsivo (Flexbox):** Interfaz limpia y estilizada con tarjetas independientes para la gestión de productos y tablas organizadas mediante CSS nativo.
+* **Operaciones CRUD Completas con SQL:**
+  * **Agregar:** Inserción segura de productos controlando duplicados (`UNIQUE constraint`).
+  * **Actualizar:** Modificación en tiempo real de precios y existencias con recalculado automático de totales del inventario.
+  * **Eliminar:** Remoción de registros del sistema mediante parámetros dinámicos con ventanas nativas de confirmación en el navegador.
+* **Control de Errores y Seguridad (Try/Except/Finally):** Gestión segura de conexiones SQL para prevenir la corrupción de datos y blindaje de rutas mediante el método seguro **POST**.
+* **Sistema de Notificaciones Flash:** Alertas de color dinámico (verde para éxito / rojo para peligro) inyectadas directamente en el flujo HTML con Jinja2.
+* **Módulo de Exportación Multiformato (RAM-on-the-fly):** Generación de reportes inmediatos en la memoria RAM del servidor sin generar almacenamiento basura:
+  * 📄 **TXT:** Reporte estructurado en texto plano alineado con tabuladores tipográficos.
+  * 📊 **CSV:** Archivo nativo de Excel delimitado por comas, listo para análisis financiero.
+  * ⚙️ **JSON:** Estructura jerárquica de diccionarios, ideal para integraciones o futuras API REST.
 
-🛠️ Tecnologías utilizadas
+---
 
-- Python
-- SQLite
-- JSON
-- CSV
-- Datetime
-- Git
-- GitHub
+## 🛠️ Arquitectura del Proyecto
 
-📚 Conceptos aplicados
+El proyecto sigue la estructura jerárquica oficial recomendada por la comunidad de Flask:
 
-- Funciones
-- Diccionarios
-- Bucles ("while" y "for")
-- Manejo de excepciones
-- CRUD (Create, Read, Update, Delete)
-- Bases de datos SQL
-- Exportación de archivos
-- Validación de datos
-
-🗄️ Operaciones CRUD
-
-Create
-
-Agregar productos al inventario.
-
-Read
-
-Consultar y buscar productos.
-
-Update
-
-Actualizar cantidad, precio y total de productos.
-
-Delete
-
-Eliminar productos del inventario.
-
-🔮 Próximas mejoras
-
-- Interfaz web con Flask.
-- Diseño HTML y CSS.
-- Sistema de usuarios.
-- Dashboard de estadísticas.
-- Despliegue en la nube.
+```text
+PROYECTOS/
+│
+├── inventario.py        # Servidor backend de Flask, rutas y lógica SQL
+├── .gitignore           # Archivo de exclusión para evitar subir datos locales
+├── README.md            # Documentación oficial del repositorio (este archivo)
+└── templates/           # Carpeta contenedora de vistas HTML
+    └── inventario.html  # Plantilla web del frontend armada con Jinja2
 
 👨‍💻 Autor
 
 Sergio Cuellar Mendoza
 
-Proyecto de aprendizaje y práctica desarrollado con Python y SQLite.
