@@ -1,5 +1,9 @@
 # 🛒 Sistema de Control de Inventario Web con SQL (Flask)
 
+<p align="center">
+  <img src="C:\Users\Usuario\Pictures\Screenshots\Screenshot 2026-06-07 173714.png" alt="Dashboard del Sistema de Inventarios" width="900">
+</p>
+
 Una aplicación web moderna, ligera y robusta desarrollada en **Python** utilizando el microframework **Flask** y **SQLite3** como motor de base de datos. Esta versión migra la lógica de consola anterior a una interfaz gráfica de usuario (GUI) basada en navegador, incorporando un sistema dinámico de alertas y un módulo avanzado de exportación de reportes.
 
 ---
